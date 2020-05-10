@@ -29,8 +29,6 @@ let memory = 0;
 let isActive = false;
 let operation = '';
 let finished = false;
-//const memoryDisplay = document.getElementById('memory_display');
-//memoryDisplay.innerHTML = memory;
 
 //Add number of button clicked to display
 function numButtonClick(num) {
@@ -71,9 +69,6 @@ function arithmatic() {
         case 'divide':
             memory /= parseFloat(displayValue);
             break;
-        /*case 'root':
-            memory = Math.sqrt(memory);
-            break;*/
         case '':
             memory += parseFloat(displayValue);
             break;
@@ -95,25 +90,30 @@ buttonSeven.onclick = () => {numButtonClick('7')};
 buttonEight.onclick = () => {numButtonClick('8')};
 buttonNine.onclick = () => {numButtonClick('9')};
 buttonZero.onclick = () => {numButtonClick('0')};
+
+//Number modifier handlers:
 buttonDot.onclick = () => {
     if(displayValue.indexOf('.') === -1) {
         displayValue += '.';
         display.innerHTML = displayValue;
     }
-};
+}
+
+buttonNegative.onclick = () => {
+    displayValue = (parseFloat(displayValue) * -1).toString();
+    display.innerHTML = displayValue;
+}
 
 //Clear button click handlers:
 buttonClear.onclick = () => {
     displayValue = '0';
     display.innerHTML = displayValue;
-//    memoryDisplay.innerHTML = memory;
 }
 
 buttonAllClear.onclick = () => {
     displayValue = '0';
     display.innerHTML = displayValue;
     memory = 0;
-//    memoryDisplay.innerHTML = memory;
 }
 
 buttonPlus.onclick = () => {
@@ -158,11 +158,6 @@ buttonDivide.onclick = () => {
     }
     operation = 'divide';
     isActive = true;
-}
-
-buttonNegative.onclick = () => {
-    displayValue = (parseFloat(displayValue) * -1).toString();
-    display.innerHTML = displayValue;
 }
 
 //Enter button handler:
