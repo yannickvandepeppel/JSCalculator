@@ -32,24 +32,26 @@ let finished = false;
 
 //Add number of button clicked to display
 function numButtonClick(num) {
-    if(finished === true) {
-        memory = 0;
-        finished = false;
+    if(displayValue.length < 8) {
+        if(finished === true) {
+            memory = 0;
+            finished = false;
+        }
+        if(displayValue === '0') {
+            displayValue = num;
+            display.innerHTML = displayValue;
+        } else {
+            displayValue += num;
+            display.innerHTML = displayValue;
+        }
+        isActive = false;
     }
-    if(displayValue === '0') {
-        displayValue = num;
-        display.innerHTML = displayValue;
-    } else {
-        displayValue += num;
-        display.innerHTML = displayValue;
-    }
-    isActive = false;
 }
 
 //Calculate number and add number to memory
 function arithmatic() {
     if(operation === 'divide' && parseFloat(displayValue) == 0) {
-        memory = 'DIVIDE BY 0 ERROR';
+        memory = 'ERROR';
         display.innerHTML = memory;
         memory = 0;
         operation = '';
@@ -75,8 +77,21 @@ function arithmatic() {
         default:
             display.innerHTML = 'ERROR';
     }
-    display.innerHTML = memory;
+    display.innerHTML = checkLength(memory.toString());
     displayValue = '0';
+}
+
+function checkLength(string) {
+    if(string.length > 8) {
+        if(string.indexOf('.') === -1) {
+            memory = 0;
+            return "OVERFLOW";
+        } else {
+            return string.substring(0, 9);
+        }
+    } else {
+        return string;
+    }
 }
 
 //Number button click handlers:
@@ -165,5 +180,4 @@ buttonEnter.onclick = () => {
     arithmatic();
     operation = '';
     finished = true;
-} 
-
+}
