@@ -1,0 +1,31 @@
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 3px;
+    margin: 0 auto;
+    width: 300px;
+    height: 400px;
+    cursor: pointer;
+
+}
+
+.item {
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 25px;
+    border-radius: 5px;
+}
+
+.display {
+    grid-column: 1 / span 4;
+    text-align: right;
+}
+
+#enter {
+    grid-column: 2 / span 2;
+}
+
+#memory_display {
+    display: none;
+}
