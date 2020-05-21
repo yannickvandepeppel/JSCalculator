@@ -29,6 +29,7 @@ let memory = 0;
 let isActive = false;
 let operation = '';
 let finished = false;
+let isNegative = false;
 
 //Add number of button clicked to display
 function numButtonClick(num) {
@@ -39,6 +40,9 @@ function numButtonClick(num) {
         }
         if(displayValue === '0') {
             displayValue = num;
+            display.innerHTML = displayValue;
+        }else if(displayValue === '-0') {
+            displayValue = '-' + num;
             display.innerHTML = displayValue;
         } else {
             displayValue += num;
@@ -115,8 +119,15 @@ buttonDot.onclick = () => {
 }
 
 buttonNegative.onclick = () => {
-    displayValue = (parseFloat(displayValue) * -1).toString();
-    display.innerHTML = displayValue;
+    if(!isNegative) {
+        displayValue = "-" + displayValue;
+        display.innerHTML = displayValue;
+        isNegative = true;
+    } else {
+        displayValue = displayValue.substring(1);
+        display.innerHTML = displayValue;
+        isNegative = false;
+    }
 }
 
 //Clear button click handlers:
