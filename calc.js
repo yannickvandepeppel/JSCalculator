@@ -85,9 +85,10 @@ function arithmatic() {
     displayValue = '0';
 }
 
+// Checks if number in memory fits on display
 function checkLength(string) {
     if(string.length > 8) {
-        if(string.indexOf('.') === -1) {
+        if(string.indexOf('.') === -1 || string.indexOf('.') > 8) {
             memory = 0;
             return "OVERFLOW";
         } else {
